@@ -1,0 +1,26 @@
+Test Smell,Before Dantes,After Dantes,Difference (%)
+Print Statement,15,3,80.0
+General Fixture,262,77,70.61
+Assertion Roulette,4958,1861,62.46
+Redundant Assertion,33,14,57.58
+Sensitive Equality,66,31,53.03
+Duplicate Assert,866,412,52.42
+Constructor Initialization,189,103,45.5
+Sleepy Test,205,122,40.49
+Conditional Test Logic,2373,1418,40.24
+Test Run War,15,9,40.0
+Verbose Test,1026,625,39.08
+Exception Catching Throwing,1175,727,38.13
+Magic Number Test,2885,1837,36.33
+Test Code Duplication,1324,889,32.85
+Indirect Test,1117,754,32.5
+For Test Only,114,77,32.46
+Eager Test,1011,709,29.87
+Lazy Test,811,582,28.24
+Unknown Test,466,353,24.25
+Dependent Test,297,234,21.21
+IgnoredTest,92,73,20.65
+Resource Optimism,285,242,15.09
+Mystery Guest,280,241,13.93
+Default Test,0,0,0.0
+EmptyTest,2,2,0.0
