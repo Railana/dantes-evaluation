@@ -1,4 +1,4 @@
-Test Smell,Before Dantes,After Dantes,Difference (%)
+Test Smell,Before Dantes,After Dantes,Reduction (%)
 EmptyTest,5,1,80.0
 Redundant Assertion,183,38,79.23
 Print Statement,191,63,67.02
