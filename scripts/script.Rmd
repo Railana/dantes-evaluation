@@ -1,0 +1,146 @@
+---
+title: "Statistical Analysis [DANTES]"
+author: "Railana Santana"
+output: html_document
+---
+
+# 1. Data Preparation
+
+This analysis compares the number of test smell occurrences before and after refactoring with DANTES across ten open-source Java projects.
+
+Data import:
+```{r}
+BEFORE <- list(
+  Accumulo   = c(3644, 10, 460, 1, 186, 128, 28, 1185, 41, 6, 49),
+  AMDP       = c(175, 0, 39, 0, 6, 15, 0, 21, 14, 0, 0),
+  Bookkeeper = c(4958, 189, 866, 2, 1175, 262, 92, 2885, 280, 15, 33),
+  Cassandra  = c(8790, 54, 2089, 0, 1219, 158, 490, 13216, 301, 80, 69),
+  Cayenne    = c(4180, 0, 232, 1, 65, 72, 6, 1238, 72, 0, 22),
+  CXF        = c(11045, 128, 1043, 8, 1724, 271, 158, 4088, 404, 27, 14),
+  DBLE       = c(815, 2, 66, 4, 8, 2, 31, 472, 0, 19, 1),
+  Hive       = c(11104, 66, 1404, 5, 716, 283, 118, 5167, 92, 191, 183),
+  Kapua      = c(431, 12, 295, 0, 491, 830, 10, 230, 1, 3, 2),
+  Wicket     = c(3709, 14, 554, 0, 176, 73, 7, 1032, 25, 17, 52)
+)
+
+AFTER <- list(
+  Accumulo   = c(903, 7, 180, 0, 114, 27, 16, 673, 35, 0, 15),
+  AMDP       = c(50, 0, 12, 0, 3, 14, 0, 15, 10, 0, 0),
+  Bookkeeper = c(1861, 103, 412, 2, 727, 77, 73, 1837, 241, 3, 14),
+  Cassandra  = c(3467, 48, 1281, 0, 986, 55, 440, 11589, 255, 33, 28),
+  Cayenne    = c(319, 0, 52, 0, 52, 12, 3, 708, 68, 0, 4),
+  CXF        = c(2096, 85, 161, 5, 1152, 47, 120, 2232, 278, 1, 6),
+  DBLE       = c(91, 1, 4, 4, 4, 2, 29, 276, 0, 15, 0),
+  Hive       = c(4361, 50, 552, 1, 479, 95, 93, 3318, 82, 63, 38),
+  Kapua      = c(21, 9, 99, 0, 81, 76, 6, 61, 0, 0, 0),
+  Wicket     = c(1072, 14, 195, 0, 149, 9, 5, 532, 23, 2, 33)
+)
+```
+
+Visualizing project data BEFORE and AFTER:
+```{r}
+print(AFTER)
+print(BEFORE)
+```
+
+
+# 2. Descriptive Analysis
+
+We first calculate the total number of test smell occurrences for each project.
+
+```{r descriptive}
+before <- sapply(BEFORE, sum)
+after <- sapply(AFTER, sum)
+
+diference <- before - after
+
+reduction <- (diference / before) * 100
+
+results <- data.frame(
+  Project = names(before),
+  Before = as.numeric(before),
+  After = as.numeric(after),
+  Difference = as.numeric(diference),
+  Reduction = round(as.numeric(reduction), 2)
+)
+
+knitr::kable(
+  results,
+  caption = "Test smell reduction by project."
+)
+```
+
+# 3. Normality Test
+
+```{r normality}
+before <- sapply(BEFORE, sum)
+after <- sapply(AFTER, sum)
+
+# Paired differences
+diference <- before - after
+
+# Shapiro-Wilk normality test
+shapiro.test(diference)
+```
+
+# 4. Paired Student's t-test
+
+We use "paired = TRUE" because the values are related: each project has a measurement before and another after the refactoring.
+
+H0: The average difference between Before and After is equal to zero.
+H1: The average difference between Before and After is different from zero.
+
+```{r student-t-test}
+resultado_t <- t.test(
+  before,
+  after,
+  paired = TRUE,
+  alternative = "two.sided",
+  conf.level = 0.95
+)
+
+print(resultado_t)
+```
+
+# 5. Wilcoxon Signed-Rank Test
+
+We applied the Wilcoxon signed-rank test to compare the number of test smell occurrences before and after refactoring.
+
+The hypotheses for the two-tailed test, under the assumption of symmetry of the distribution of differences, are:
+H0: The distribution of differences is centered at zero.
+H1: The distribution of differences is not centered at zero.
+
+```{r wilcoxon-test}
+# Total occurrences per project
+before <- sapply(BEFORE, sum)
+after <- sapply(AFTER, sum)
+
+# Paired differences
+paired_differences <- before - after
+
+# Wilcoxon signed-rank test (two-sided)
+wilcoxon_test <- wilcox.test(
+  before,
+  after,
+  paired = TRUE,
+  alternative = "two.sided",
+  exact = TRUE,
+  conf.level = 0.95
+)
+
+print(wilcoxon_test)
+```
+
+This indicates that there is a statistically significant difference between the test smell counts before and after refactoring.
+
+# 6. Data Visualization
+
+```{r plot}
+boxplot(
+  before,
+  after,
+  names = c("Before", "After"),
+  ylab = "Number of Test Smells",
+  main = "Test Smells Before and After DANTES"
+)
+```
