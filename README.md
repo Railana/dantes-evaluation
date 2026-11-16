@@ -14,3 +14,5 @@
 | Hive | `5160d3a` | https://github.com/apache/hive |
 | kapua | `56adf32` | https://github.com/eclipse/kapua |
 | Wicket | `48b1c3c` | https://github.com/apache/wicket |
+
+Projects source code: https://github.com/Railana/dantes-evaluation-projects
