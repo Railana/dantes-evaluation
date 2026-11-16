@@ -1,4 +1,4 @@
-Test Smell,Before Dantes,After Dantes,Difference (%)
+Test Smell,Before Dantes,After Dantes,Reduction (%)
 EmptyTest,1,0,100.0
 Assertion Roulette,4180,319,92.37
 General Fixture,72,12,83.33
