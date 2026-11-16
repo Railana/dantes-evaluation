@@ -1,4 +1,4 @@
-Test Smell,Before Dantes,After Dantes,Difference (%)
+Test Smell,Before Dantes,After Dantes,Reduction (%)
 Assertion Roulette,175,50,71.43
 Duplicate Assert,39,12,69.23
 Indirect Test,35,11,68.57
