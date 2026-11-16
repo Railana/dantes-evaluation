@@ -1,4 +1,4 @@
-Test Smell,Before Dantes,After Dantes,Difference (%)
+Test Smell,Before Dantes,After Dantes,Reduction (%)
 General Fixture,158,55,65.19
 Assertion Roulette,8790,3467,60.56
 Redundant Assertion,69,28,59.42
