@@ -1,4 +1,4 @@
-Test Smell,Before Dantes,After Dantes,Difference (%)
+Test Smell,Before Dantes,After Dantes,Reduction (%)
 EmptyTest,1,0,100.0
 Print Statement,6,0,100.0
 General Fixture,128,27,78.91
