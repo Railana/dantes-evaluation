@@ -1,4 +1,4 @@
-Test Smell,Before Dantes,After Dantes,Difference (%)
+Test Smell,Before Dantes,After Dantes,Reduction (%)
 Print Statement,17,2,88.24
 General Fixture,73,9,87.67
 Assertion Roulette,3709,1072,71.1
