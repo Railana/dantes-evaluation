@@ -1,4 +1,4 @@
-Test Smell,Before Dantes,After Dantes,Difference (%)
+Test Smell,Before Dantes,After Dantes,Reduction (%)
 Redundant Assertion,1,0,100.0
 Duplicate Assert,66,4,93.94
 Assertion Roulette,815,91,88.83
